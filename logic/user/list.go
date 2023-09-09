@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"time"
 
 	"gin-plus-app/model"
 )
@@ -33,6 +34,8 @@ type (
 func (u *User) List(ctx context.Context, req *ListReq) (*ListResp, error) {
 	var userModelList []model.User
 	var total int64
+
+	time.Sleep(1 * time.Second)
 
 	//db := model.NewUserDB(ctx)
 	//

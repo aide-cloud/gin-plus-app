@@ -3,6 +3,29 @@ info:
     version: v0.3.1
 openapi: 3.0.3
 paths:
+    /api/enterprise/create:
+        post:
+            operationId: Create
+            responses:
+                200:
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: string
+                                        title: Id
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                name:
+                                    type: string
+                                    title: Name
     /api/user/create:
         post:
             operationId: Create
@@ -99,6 +122,38 @@ paths:
                     application/json:
                         schema:
                             type: object
+    /api/user/err:
+        post:
+            operationId: CreateErr
+            responses:
+                200:
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: integer
+                                        title: ID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                age:
+                                    type: integer
+                                    title: Age
+                                avatar:
+                                    type: string
+                                    title: Avatar
+                                name:
+                                    type: string
+                                    title: Name
+                                remark:
+                                    type: string
+                                    title: Remark
     /api/user/list:
         get:
             operationId: List
