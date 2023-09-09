@@ -35,6 +35,32 @@ paths:
                                 remark:
                                     type: string
                                     title: Remark
+    /api/user/delete/:id:
+        delete:
+            operationId: Delete
+            responses:
+                200:
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: integer
+                                        title: ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    title: ID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
     /api/user/detail/:id:
         get:
             operationId: Detail
