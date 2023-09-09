@@ -255,3 +255,74 @@ paths:
                                 remark:
                                     type: string
                                     title: Remark
+    /api/v1/tag/create:
+        post:
+            operationId: Create
+            responses:
+                200:
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: integer
+                                        title: ID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                color:
+                                    type: string
+                                    title: Color
+                                name:
+                                    type: string
+                                    title: Name
+    /api/v1/tag/list:
+        get:
+            operationId: List
+            responses:
+                200:
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    list:
+                                        type: array
+                                        title: List
+                                        items:
+                                            properties:
+                                                color:
+                                                    type: string
+                                                    title: Color
+                                                id:
+                                                    type: integer
+                                                    title: ID
+                                                name:
+                                                    type: string
+                                                    title: Name
+                                            type: object
+                                    total:
+                                        type: integer
+                                        title: Total
+            parameters:
+                - name: size
+                  in: query
+                  schema:
+                    type: integer
+                    title: Size
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    title: Page
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
