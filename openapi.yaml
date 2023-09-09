@@ -1,0 +1,176 @@
+info:
+    title: github.com/aide-cloud/gin-plus
+    version: v0.3.1
+openapi: 3.0.3
+paths:
+    /api/user/create:
+        post:
+            operationId: Create
+            responses:
+                200:
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: integer
+                                        title: ID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                age:
+                                    type: integer
+                                    title: Age
+                                avatar:
+                                    type: string
+                                    title: Avatar
+                                name:
+                                    type: string
+                                    title: Name
+                                remark:
+                                    type: string
+                                    title: Remark
+    /api/user/detail/:id:
+        get:
+            operationId: Detail
+            responses:
+                200:
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    age:
+                                        type: integer
+                                        title: Age
+                                    avatar:
+                                        type: string
+                                        title: Avatar
+                                    id:
+                                        type: integer
+                                        title: ID
+                                    name:
+                                        type: string
+                                        title: Name
+                                    remark:
+                                        type: string
+                                        title: Remark
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    title: ID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+    /api/user/list:
+        get:
+            operationId: List
+            responses:
+                200:
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    current:
+                                        type: integer
+                                        title: Current
+                                    list:
+                                        type: array
+                                        title: List
+                                        items:
+                                            properties:
+                                                age:
+                                                    type: integer
+                                                    title: Age
+                                                avatar:
+                                                    type: string
+                                                    title: Avatar
+                                                id:
+                                                    type: integer
+                                                    title: ID
+                                                name:
+                                                    type: string
+                                                    title: Name
+                                                remark:
+                                                    type: string
+                                                    title: Remark
+                                            type: object
+                                    size:
+                                        type: integer
+                                        title: Size
+                                    total:
+                                        type: integer
+                                        title: Total
+            parameters:
+                - name: current
+                  in: query
+                  schema:
+                    type: integer
+                    title: Current
+                - name: size
+                  in: query
+                  schema:
+                    type: integer
+                    title: Size
+                - name: keyword
+                  in: query
+                  schema:
+                    type: string
+                    title: Keyword
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+    /api/user/update/:id:
+        put:
+            operationId: Update
+            responses:
+                200:
+                    description: ""
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    id:
+                                        type: integer
+                                        title: ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    title: ID
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                age:
+                                    type: integer
+                                    title: Age
+                                avatar:
+                                    type: string
+                                    title: Avatar
+                                name:
+                                    type: string
+                                    title: Name
+                                remark:
+                                    type: string
+                                    title: Remark
