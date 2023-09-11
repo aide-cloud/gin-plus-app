@@ -12,6 +12,7 @@ API项目。免于重复造轮子，专注于业务开发。虽然对gin进行�
 - 集成graphql，支持graphql接口
 - 集成prometheus-metrics，支持接口性能监控, 开启metrics后，会自动在`/metrics`路径下生成接口性能监控数据, 可以被prometheus采集
 - 集成ping，支持接口健康检查, 可以重写`/ping`路径下的接口健康检查逻辑
+- 支持优雅退出，可以通过`Ctrl+C`触发优雅退出
 
 ## 初始化gin
 
