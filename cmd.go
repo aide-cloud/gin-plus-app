@@ -3,6 +3,7 @@ package main
 import (
 	"gin-plus-app/logic"
 	"gin-plus-app/logic/enterprise/contract"
+	"gin-plus-app/logic/graphql"
 	"gin-plus-app/middler"
 	ginplus "github.com/aide-cloud/gin-plus"
 	"github.com/gin-gonic/gin"
@@ -43,9 +44,16 @@ func main() {
 	ginEngine := ginplus.New(r,
 		ginplus.AppendHttpMethodPrefixes(httpMethodPrefixes...),
 		ginplus.WithControllers(logic.NewApi()),
+		ginplus.WithGraphqlConfig(ginplus.GraphqlConfig{
+			Enable:     true,
+			HandlePath: "graphql",
+			ViewPath:   "graphql",
+			Root:       graphql.NewResolver(),
+			Content:    graphql.Sdl,
+		}),
 	)
 	// 注册公共无权限路由
-	ginEngine.RegisterSwaggerUI().RegisterPing().RegisterMetrics()
+	ginEngine.RegisterSwaggerUI().RegisterPing().RegisterMetrics().RegisterGraphql()
 	// 注册公共有权限路由
 	authGroup := r.Group("/auth", middler.MustLogin())
 	// 注册企业路由
