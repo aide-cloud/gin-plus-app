@@ -37,9 +37,9 @@ r := gin.Default()
 ginEngine := ginplus.New(r)
 
 ginEngine.GET("/say", func (c *gin.Context) {
-c.JSON(200, gin.H{
-"message": "hello world",
-})
+    c.JSON(200, gin.H{
+        "message": "hello world",
+    })
 })
 ```
 
@@ -57,13 +57,13 @@ c.JSON(200, gin.H{
 type Article struct {}
 
 func NewArticleAPI() *Article {
-return &Article{}
+    return &Article{}
 }
 
 func (a *Article) Post() gin.HandlerFunc {
-return func (ctx *gin.Context) {
-log.Println("create article")
-}
+    return func (ctx *gin.Context) {
+        log.Println("create article")
+    }
 }
 // 初始化gin-plus
 ginEngine := ginplus.New(r, ginplus.WithControllers(NewArticleAPI()))
@@ -85,24 +85,24 @@ ginEngine := ginplus.New(r, ginplus.WithControllers(NewArticleAPI()))
 type Contract struct {}
 
 func NewContract() *Contract {
-return &Contract{}
+    return &Contract{}
 }
 
 type CreateReq struct {
-Name string `json:"name" binding:"required"`
+    Name string `json:"name"`
 }
 
 type CreateResp struct {
-Id  string `json:"id"`
-EID string `json:"eid"`
+    Id  string `json:"id"`
+    EID string `json:"eid"`
 }
 
 func (c *Contract) PostInfo(ctx context.Context, req *CreateReq) (*CreateResp, error) {
-// TODO 业务逻辑
-return &CreateResp{
-Id:  "1",
-EID: req.EID,
-}, nil
+    // TODO 业务逻辑
+    return &CreateResp{
+        Id:  "1",
+        EID: req.EID,
+    }, nil
 }
 
 // 初始化gin-plus
@@ -130,22 +130,22 @@ type Resolver struct {
 }
 
 func (r *Resolver) Ping() string {
-return "pong"
+    return "pong"
 }
 
 func NewResolver() *Resolver {
-return &Resolver{}
+    return &Resolver{}
 }
 
 // 初始化gin-plus
 ginEngine := ginplus.New(r,
-ginplus.WithGraphqlConfig(ginplus.GraphqlConfig{
-Enable:     true,
-HandlePath: "graphql",
-ViewPath:   "graphql",
-Root:       graphql.NewResolver(),
-Content:    graphql.Sdl,
-}),
+    ginplus.WithGraphqlConfig(ginplus.GraphqlConfig{
+        Enable:     true,
+        HandlePath: "graphql",
+        ViewPath:   "graphql",
+        Root:       graphql.NewResolver(),
+        Content:    graphql.Sdl,
+    }),
 )
 ginEngine.RegisterGraphql()
 ```
@@ -233,11 +233,11 @@ ginEngine.RegisterSwaggerUI().RegisterPing().RegisterMetrics().RegisterGraphql()
 r := gin.Default()
 // 注册中间件
 r.Use(
-middler.RecoverMiddleware(),
-middler.LoggerMiddleware(),
-middler.MetricSecondsMiddleware(),
-middler.IpMetricMiddleware(),
-middler.MetricRequestsMiddleware(),
+    middler.RecoverMiddleware(),
+    middler.LoggerMiddleware(),
+    middler.MetricSecondsMiddleware(),
+    middler.IpMetricMiddleware(),
+    middler.MetricRequestsMiddleware(),
 )
 ```
 
@@ -247,11 +247,11 @@ middler.MetricRequestsMiddleware(),
 
 ```go
 func (v *V1) Middlewares() []gin.HandlerFunc {
-return []gin.HandlerFunc{
-func (ctx *gin.Context) {
-log.Println("[v1] middleware 1")
-},
-}
+    return []gin.HandlerFunc{
+        func (ctx *gin.Context) {
+            log.Println("[v1] middleware 1")
+        },
+    }
 }
 ```
 
@@ -259,18 +259,18 @@ log.Println("[v1] middleware 1")
 
 ```go
 func (u *User) MethoderMiddlewares() map[string][]gin.HandlerFunc {
-return map[string][]gin.HandlerFunc{
-"Update": {
-func (ctx *gin.Context) {
-log.Println("[User] Update mehtod middleware 1")
-},
-},
-"List": {
-func (ctx *gin.Context) {
-log.Println("[User] List mehtod middleware 1")
-},
-},
-}
+    return map[string][]gin.HandlerFunc{
+        "Update": {
+            func (ctx *gin.Context) {
+                log.Println("[User] Update mehtod middleware 1")
+            },
+        },
+        "List": {
+            func (ctx *gin.Context) {
+                log.Println("[User] List mehtod middleware 1")
+            },
+        },
+    }
 }
 ```
 
@@ -289,28 +289,28 @@ ginEngine.GenRoute(enterpriseGroup.Group("/api/v2/enterprise/:eid"), contract.Ne
 
 ```go
 type (
-// DetailReq 定义请求参数
-DetailReq struct {
-EID string `uri:"eid" skip:"true"` // skip用于跳过本次注册, 但是不影响父级已有参数获取
-ID  string `uri:"id"`              // 注册到当前路由里面
-}
-
-// DetailResp 定义返回参数
-DetailResp struct {
-Id   string `json:"id"`
-EID  string `json:"eid"`
-Name string `json:"name"`
-}
+    // DetailReq 定义请求参数
+    DetailReq struct {
+        EID string `uri:"eid" skip:"true"` // skip用于跳过本次注册, 但是不影响父级已有参数获取
+        ID  string `uri:"id"`              // 注册到当前路由里面
+    }
+    
+    // DetailResp 定义返回参数
+    DetailResp struct {
+        Id   string `json:"id"`
+        EID  string `json:"eid"`
+        Name string `json:"name"`
+    }
 )
 
 // DetailInfo 定义更新方法
 func (c *Contract) DetailInfo(ctx context.Context, req *DetailReq) (*DetailResp, error) {
-// TODO 业务逻辑
-return &DetailResp{
-Id:   req.ID,
-Name: "test",
-EID:  req.EID,
-}, nil
+    // TODO 业务逻辑
+    return &DetailResp{
+        Id:   req.ID,
+        Name: "test",
+        EID:  req.EID,
+    }, nil
 }
 ```
 
