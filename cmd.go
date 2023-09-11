@@ -39,11 +39,7 @@ func main() {
 		middler.IpMetricMiddleware(),
 		middler.MetricRequestsMiddleware(),
 	)
-	r.GET("/say", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "hello world",
-		})
-	})
+
 	// 初始化gin-plus
 	ginEngine := ginplus.New(r,
 		ginplus.AppendHttpMethodPrefixes(httpMethodPrefixes...),
@@ -56,6 +52,13 @@ func main() {
 			Content:    graphql.Sdl,
 		}),
 	)
+
+	ginEngine.GET("/say", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "hello world",
+		})
+	})
+
 	// 注册公共无权限路由
 	ginEngine.RegisterSwaggerUI().RegisterPing().RegisterMetrics().RegisterGraphql()
 	// 注册公共有权限路由
