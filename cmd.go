@@ -39,6 +39,11 @@ func main() {
 		middler.IpMetricMiddleware(),
 		middler.MetricRequestsMiddleware(),
 	)
+	r.GET("/say", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "hello world",
+		})
+	})
 	// 初始化gin-plus
 	ginEngine := ginplus.New(r,
 		ginplus.AppendHttpMethodPrefixes(httpMethodPrefixes...),
