@@ -65,7 +65,7 @@ func main() {
 	authGroup := r.Group("/auth", middler.MustLogin())
 	// 注册企业路由
 	enterpriseGroup := authGroup.Group("/enterprise/:eid")
-	ginEngine.GenRoute(enterpriseGroup.Group("/api/v2/enterprise/:eid"), contract.New())
+	ginEngine.GenRoute(enterpriseGroup, contract.New())
 	// 启动gin-plus
 	ginplus.NewCtrlC(ginEngine).Start()
 }
