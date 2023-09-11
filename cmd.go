@@ -13,8 +13,7 @@ var httpMethodPrefixes = []ginplus.HttpMethod{
 	{
 		Prefix: "Create",
 		Method: ginplus.Post,
-	},
-	{
+	}, {
 		Prefix: "Update",
 		Method: ginplus.Put,
 	}, {
